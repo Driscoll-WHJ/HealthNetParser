@@ -572,7 +572,7 @@ namespace HealthNetParser.Model
 
 
 
-	public class HealthNetHistoricalSpanClassMap : ClassMap<HealthNetHistoricalSpan>
+	public class HealthNetHistoricalSpanClassMap : ClassMap<HealthNetOutPutModel>
 	{
 		public HealthNetHistoricalSpanClassMap()
 		{

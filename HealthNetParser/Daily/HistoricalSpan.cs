@@ -61,8 +61,7 @@ namespace HealthNetParser
 				foreach (var record in records)
 				{
 					var HistoricalSpan = new HealthNetOutPutModel();
-					//string dataRow = string.Join(",", typeof(HealthNetFromCSV).GetProperties().Select(p => p.GetValue(record)));
-					//writer.WriteLine(dataRow);
+					
 					string input = record.CaseNumber_3H;
 					string[] parts = input.Split(';');
 					var aca = "";
@@ -76,15 +75,15 @@ namespace HealthNetParser
 				
 					DateTime Dob = CSVHelper.CleanDateTimeString(record.DateOfBirth);
 					var FileType = "";
-					if(record.MasterPolicyNumber.Contains("HN-405-"))
+					if(record.CoverageDescription.Contains("405"))
 					{
 						FileType = "405";
 					}
-					if (record.MasterPolicyNumber.Contains("HN-427-"))
+					if (record.CoverageDescription.Contains("427"))
 					{
 						FileType = "427";
 					}
-					string NewSubscriberNumber = record.SubscriberNumber + "-01";
+					string NewSubscriberNumber = record.SubscriberNumber.ToString() + "-01";
 					// Access the properties of the record (your model)
 					HistoricalSpan.AlreadyinMeditrack = "0";
 					HistoricalSpan.Eligiblecurrent = "1";

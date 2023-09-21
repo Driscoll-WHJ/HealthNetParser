@@ -38,14 +38,14 @@ namespace HealthNetParser.Data
 						if (columns.Length != 0)
 						{
 							HealthNetFromCSV record = new HealthNetFromCSV();
-							if (file.FullName.Contains("HN-405-"))
-							{
-								columns[0] = "405";
-							}
-							if (file.FullName.Contains("HN-427-"))
-							{
-								columns[0] = "427";
-							}
+							//if (file.Name.Contains("HN-405-"))
+							//{
+							//	columns[0] = "405";
+							//}
+							//if (file.Name.Contains("HN-427-"))
+							//{
+							//	columns[0] = "427";
+							//}
 							// Map properties using reflection
 							var properties = typeof(HealthNetFromCSV).GetProperties();
 							for (int i = 0; i < columns.Length && i < properties.Length; i++)
