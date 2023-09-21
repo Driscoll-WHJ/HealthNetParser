@@ -66,11 +66,12 @@ namespace HealthNetParser
 					string input = record.CaseNumber_3H;
 					string[] parts = input.Split(';');
 					var aca = "";
-					var MemberPolicyNumber = "";
+					string MemberPolicyNumber = "";
 					if (parts.Length >= 2)
 					{
 						aca = parts[1].Trim();
 						MemberPolicyNumber = parts[2].Trim();
+						MemberPolicyNumber = parts[0].Trim() + parts[1].Trim() + parts[2].Trim();
 					}
 				
 					DateTime Dob = CSVHelper.CleanDateTimeString(record.DateOfBirth);
@@ -83,6 +84,7 @@ namespace HealthNetParser
 					{
 						FileType = "427";
 					}
+					string NewSubscriberNumber = record.SubscriberNumber + "-01";
 					// Access the properties of the record (your model)
 					HistoricalSpan.AlreadyinMeditrack = "0";
 					HistoricalSpan.Eligiblecurrent = "1";
@@ -90,10 +92,10 @@ namespace HealthNetParser
 					HistoricalSpan.GroupNumber = CalculatedGroup;
 					HistoricalSpan.ReimbursementName = record.ReimbursementName;
 					HistoricalSpan.NationalIndividualID = record.SubscriberNumber;
-					HistoricalSpan.SubscriberNumber = record.SubscriberNumber + "-01";
+					HistoricalSpan.SubscriberNumber = NewSubscriberNumber.ToString();
 					HistoricalSpan.SubscriberPolicyNumber = record.SubscriberPolicyNumber;
-					HistoricalSpan.MemberNumber = record.SubscriberNumber + "-01";
-					HistoricalSpan.MemberPolicyNumber = record.MemberPolicyNumber;
+					HistoricalSpan.MemberNumber = NewSubscriberNumber.ToString();
+					HistoricalSpan.MemberPolicyNumber = MemberPolicyNumber;
 					HistoricalSpan.SocialSecurityNumber = record.SocialSecurityNumber;
 					HistoricalSpan.TierName = "Employee Only";
 					HistoricalSpan.LastName = record.LastName;
@@ -104,7 +106,7 @@ namespace HealthNetParser
 					HistoricalSpan.City = record.City;
 					HistoricalSpan.State = record.State;
 					HistoricalSpan.Zip = record.Zip;
-					HistoricalSpan.HomePhone = record.HomePhone;
+					HistoricalSpan.HomePhone = record.Phone;
 					HistoricalSpan.WorkPhone = record.WorkPhone;
 					if (record.MemberLanguageXML.Contains("Language LanguageCode"))
 					{
